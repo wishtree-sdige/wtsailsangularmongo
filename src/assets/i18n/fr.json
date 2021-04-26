@@ -1,0 +1,8 @@
+{
+  "Login": {
+    "username":"Nom d'utilisateur",
+    "password":"mot de passe",
+    "login":"s'identifier",
+    "register":"S'inscrire maintenant!"
+  }
+}

@@ -1,0 +1,33 @@
+<div class="container col-lg-4">
+  <h1 class="text-center">Login</h1>
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
+        <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+        <div class="alert alert-success" *ngIf='loginSuccess'>{{successMessage}}</div>
+
+        <div class="form-group" >
+          <label for="email">{{'Login.username' | translate}}</label>
+          <input formControlName="username" type="text" class="form-control" id="username" placeholder="User name" name="username" (blur)=loginValidationErrors() [ngClass]="{ 'is-invalid': formErrors.username}" required >
+          <span class="invalid-feedback" *ngIf = formErrors.username>{{formErrors.username}}</span>
+        </div>
+        <div class="form-group">
+          <label for="pwd">{{'Login.password' | translate}}</label>
+          <input formControlName="password" type="password" class="form-control" id="password"
+            placeholder="Password" name="password" [ngClass]="{ 'is-invalid': formErrors.password}" required>
+            <span class="invalid-feedback" *ngIf = formErrors.password>{{formErrors.password}}</span>
+        </div>
+        <button class="btn btn-primary">{{'Login.login' | translate}}</button>
+
+        <a style="float: right;"
+          routerLink="/register">{{'Login.register' | translate}}</a>
+
+      </form>
+    </div>
+  </div>
+  <div style="padding-top: 10%;" [hidden]="!show" id="recaptcha">
+    <re-captcha (resolved)="resolved($event)" siteKey="6LdQRuEUAAAAAAklIl4_dd11E0vqJfi3bULuRZny"></re-captcha>
+  </div>
+</div>
+
+

@@ -1,0 +1,30 @@
+<div class="container col-lg-4">
+    <div class="card">
+      <div class="card-body">
+        <form name="form" (ngSubmit)="f.form.valid && edituser()" #f="ngForm" novalidate>
+          <div class="alert alert-warning" *ngIf='invalid'>{{errorMessage}}</div>
+          <div class="alert alert-success" *ngIf='registerSuccess'>{{successMessage}}</div>
+          <div class="form-group">
+              <label for="email">Email : </label>
+              <input type="text" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+              <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                  <div *ngIf="email.errors.required">Email is required</div>
+                  <div *ngIf="email.errors.email">Email must be a valid email address</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="password">Password : </label>
+              <input type="password" class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" />
+              <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                  <div *ngIf="password.errors.required">Password is required</div>
+                  <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <button class="btn btn-primary">Update</button>
+          </div>
+      </form>
+      </div>
+    </div>
+</div>
+
