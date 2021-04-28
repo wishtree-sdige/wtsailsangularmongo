@@ -1,0 +1,8 @@
+table {
+    width: 100%;
+  }
+  .logout{
+    float: right;
+    margin-bottom: 3%;
+    display: flow-root;
+  }

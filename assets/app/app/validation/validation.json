@@ -1,0 +1,30 @@
+{
+  "loginFormValidations": {
+    "username": [
+      {
+        "validation": "notEmpty",
+        "message": "Not Empty"
+      },
+      {
+        "validation": "minLength",
+        "minLength": 2,
+        "message": "minLength"
+      },
+      {
+        "validation": "email",
+        "message": "required valid email"
+      }
+    ],
+    "password": [
+      {
+        "validation": "notEmpty",
+        "message": "Not Empty"
+      },
+      {
+        "validation": "minLength",
+        "minLength": 2,
+        "message": "minLength"
+      }
+    ]
+  }
+}

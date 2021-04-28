@@ -1,0 +1,13 @@
+.breadcrumb {
+    background:none;
+    font-size: 0.8em;
+    margin: 0;
+    width: max-content;
+    display: inline-block;
+}
+  p {
+    font-family: Lato;
+  }
+  div {
+    display: inline-block;
+  }

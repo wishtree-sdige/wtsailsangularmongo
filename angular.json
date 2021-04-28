@@ -6,26 +6,26 @@
     "wtsailsangularmongo": {
       "projectType": "application",
       "schematics": {},
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
+      "root": "assets/app",
+      "sourceRoot": "assets/app",
+      "prefix": "assets/app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/wtsailsangularmongo",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "outputPath": "assets/app/dist/wtsailsangularmongo/browser",
+            "index": "assets/app/index.html",
+            "main": "assets/app/main.ts",
+            "polyfills": "assets/app/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "assets/app/favicon.ico",
+              "assets/app/assets"
             ],
             "styles": [
-              "src/custom-theme.scss",
-              "src/styles.css"
+              "assets/app/custom-theme.scss",
+              "assets/app/styles.css"
             ],
             "scripts": []
           },
@@ -33,8 +33,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "assets/app/environments/environment.ts",
+                  "with": "assets/app/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -61,8 +61,8 @@
             "staging": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.staging.ts"
+                  "replace": "assets/app/environments/environment.ts",
+                  "with": "assets/app/environments/environment.staging.ts"
                 }
               ],
               "optimization": true,
@@ -89,8 +89,8 @@
             "qa": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.qa.ts"
+                  "replace": "assets/app/environments/environment.ts",
+                  "with": "assets/app/environments/environment.qa.ts"
                 }
               ],
               "optimization": true,
@@ -113,13 +113,23 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "fr":{
+              "aot": true,
+              "outputPath": "assets/app/dist/wtsailsangularmongo",
+              "i18nFile": "assets/app/locals/messages.fr.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "fr",
+              "i18nMissingTranslation": "error"
+
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "wtsailsangularmongo:build"
+            "browserTarget": "wtsailsangularmongo:build",
+            "port": 4000 
           },
           "configurations": {
             "production": {
@@ -130,6 +140,9 @@
             },
             "qa": {
               "browserTarget": "wtsailsangularmongo:build:qa"
+            },
+            "fr":{
+              "browserTarget": "wtsailsangularmongo:build:fr"
             }
           }
         },
@@ -142,16 +155,16 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "main": "assets/app/test.ts",
+            "polyfills": "assets/app/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "assets/app/favicon.ico",
+              "assets/app/assets"
             ],
             "styles": [
-              "src/styles.css",
+              "assets/app/styles.css",
               "node_modules/datatables.net-dt/css/jquery.dataTables.css"
             ],
             "scripts": [
@@ -190,6 +203,53 @@
               "devServerTarget": "wtsailsangularmongo:serve:qa"
             }
             
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "assets/app/dist/wtsailsangularmongo/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "assets/app/environments/environment.ts",
+                  "with": "assets/app/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "wtsailsangularmongo:build",
+            "serverTarget": "wtsailsangularmongo:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "wtsailsangularmongo:build:production",
+              "serverTarget": "wtsailsangularmongo:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "wtsailsangularmongo:build:production",
+            "serverTarget": "wtsailsangularmongo:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
           }
         }
       }

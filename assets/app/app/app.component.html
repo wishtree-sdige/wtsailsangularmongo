@@ -1,0 +1,28 @@
+<html>
+  
+    <app-header></app-header>
+    <body>
+    <!-- breadcrumb -->
+   <div  class="col">
+     <ol class="breadcrumb">
+       <li class="breadcrumb-item" 
+         *ngFor="let item of breadcrumbList; let i = index"
+         [class.active]="i===breadcrumbList.length-1">
+         <a [routerLink]="item.path" *ngIf="i!==breadcrumbList.length-1">
+           {{ item.name }}
+         </a>
+         <span *ngIf="i===breadcrumbList.length-1">{{ item.name }}</span>
+       </li>
+     </ol>
+     <mat-form-field style="float:right">
+      <mat-label>Global Language</mat-label>
+      <mat-select  (selectionChange)="selectLanguage($event.value)">
+        <mat-option *ngFor="let lang of supportLanguages" [value]="lang">{{lang}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+  <router-outlet></router-outlet>
+</body>
+  <app-footer></app-footer>
+
+</html>
